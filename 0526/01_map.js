@@ -22,7 +22,22 @@ console.log(map.get("aa"));
 console.log('"aa" in o', "aa" in o)
 console.log('"cc" in o', "cc" in o)
 
+console.log(map.has("aa"));
+console.log(map.has("cc"));
+
+console.log(map);
+
+for (const c of Object.entries(o)) {
+    console.log(c);
+}
+
+console.log(map.entries());
+console.log(map.keys());
+console.log(map.values());
 
 for (const c of map) {
-
+    console.log(c);
 }
+
+console.log(Object.values(o).length);
+console.log(map.size);
