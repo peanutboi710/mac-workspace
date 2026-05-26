@@ -41,3 +41,17 @@ for (const c of map) {
 
 console.log(Object.values(o).length);
 console.log(map.size);
+
+const m = new Map();
+m.set("counter", 0);
+if (m.has("counter") && typeof m.get("counter") == "number") {
+    m.set("counter", m.get("counter") + 1);
+} else {
+    m.set("counter", 0);
+}
+console.log(m);
+
+//
+
+const mm = new Map();
+[].map()
