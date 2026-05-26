@@ -46,3 +46,14 @@ for (const v of a4) {
     sum += v;
 }
 console.log(sum);
+
+const d = ["Bob", "alice", "jAin", "Tom"];
+console.log(d.filter((v => v[0] === "a" || v[0] === "b") && v.length <= 3));
+
+console.log(
+    d
+        .map((v) => v.toLowerCase())
+        .filter((v) => v[0] === "a" || v[0] === "b")
+        .filter((v) => v.length <=3),
+
+);
