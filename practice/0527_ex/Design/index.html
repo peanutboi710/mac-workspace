@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윌리엄의 사랑의 오작교 (William's Love Bridge)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header>
+            <span class="brand-label">William's Archive</span>
+            <span class="brand-label" style="opacity: 0.6;">VOL. 07</span>
+        </header>
+
+        <!-- Poem Content Area -->
+        <article class="poem-section">
+            <h1 class="poem-title">사랑의 오작교</h1>
+            <p class="poem-body">먼 은하의 양단에 서서
+그대를 그리워하는 밤마다
+까마귀와 까치가 허공을 가르며 날아오릅니다.
+
+하늘마저 흐르는 별들의 강도
+우리의 마음까지 갈라놓지 못하리니,
+
+서로를 향해 다가서는 걸음 끝에서
+우리는 마침내 하나가 되어 만나리라.</p>
+        </article>
+
+        <!-- Hand-drawn Illustration Panel -->
+        <div class="illustration-panel">
+            <img src="assets/love_bridge.png" alt="Hand-drawn Constellation Bridge Illustration">
+        </div>
+
+        <!-- Interactive Slider Module -->
+        <div class="bridge-interactive">
+            <h3 class="bridge-title">은하의 두 별을 가까이 보내기</h3>
+            
+            <div class="bridge-visuals">
+                <div class="star-lover" id="star-left">⭐</div>
+                <div class="star-lover" id="star-right">⭐</div>
+            </div>
+
+            <div class="slider-container">
+                <input type="range" min="0" max="100" value="0" class="poem-slider" id="bridge-slider">
+            </div>
+
+            <p class="message-reveal" id="message-reveal">오작교 슬라이더를 끝까지 당기면 두 별이 만납니다.</p>
+        </div>
+
+        <!-- Love Letters Guestbook Board -->
+        <section class="guestbook-section">
+            <h2 class="board-title">마음의 편지 보관소</h2>
+
+            <!-- Form -->
+            <form class="guestbook-form" id="guestbook-form">
+                <div class="form-row">
+                    <input type="text" placeholder="보내는 이" required class="input-minimal" id="input-author" style="flex: 1;">
+                    <input type="text" placeholder="감정의 주제 (예: 기다림, 영원)" class="input-minimal" id="input-tag" style="flex: 1;">
+                </div>
+                <input type="text" placeholder="전하고 싶은 시적인 한 줄을 남겨주세요." required class="input-minimal" id="input-content">
+                <button type="submit" class="btn-pebble">편지 남기기</button>
+            </form>
+
+            <!-- Letters list -->
+            <div class="letter-list" id="letter-list">
+                <!-- Letter 1 -->
+                <div class="letter-card">
+                    <div class="letter-header">
+                        <span class="letter-author">윌리엄</span>
+                        <span class="letter-tag">인연</span>
+                    </div>
+                    <p class="letter-content">오작교 위에서 맺어진 마음은 세월이 흘러 은하수가 말라붙어도 변치 않을 것입니다.</p>
+                </div>
+                <!-- Letter 2 -->
+                <div class="letter-card">
+                    <div class="letter-header">
+                        <span class="letter-author">그리움</span>
+                        <span class="letter-tag">기다림</span>
+                    </div>
+                    <p class="letter-content">일 년에 단 하루뿐인 만남일지라도, 그 하루를 위해 남은 백 일을 기쁘게 기다릴 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>William's Poetic Sanctuary — Verset Design System Guidelines.</p>
+            <p style="opacity: 0.5; margin-top: 6px; font-size: 10px;">본 페이지는 이모지를 원칙적으로 지양하며 서정적인 미니멀리즘을 준수합니다.</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

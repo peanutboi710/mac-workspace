@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap');
+
+:root {
+    /* Color tokens from .agents/DESIGN.md */
+    --color-background: #fcf9f8;
+    --color-surface: #fcf9f8;
+    --color-surface-dim: #dcd9d9;
+    --color-on-surface: #1b1c1c; /* Deep Charcoal Ink */
+    --color-on-surface-variant: #434843;
+    --color-primary: #506052; /* Sage Green */
+    --color-on-primary: #ffffff;
+    --color-primary-container: #687969;
+    --color-on-primary-container: #f6fff4;
+    --color-secondary: #7b5455; /* Dusty Rose */
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #fdcbcb;
+    --color-on-secondary-container: #795354;
+    --color-tertiary: #5d5c58;
+    --color-on-tertiary: #ffffff;
+    --color-outline: #747872;
+    --color-outline-variant: #c3c8c1;
+
+    /* Typographic details */
+    --font-serif: 'Literata', Georgia, serif;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Spacing */
+    --spacing-unit: 8px;
+    --margin-mobile: 24px;
+    --margin-desktop: 64px;
+    --gutter: 16px;
+    --poem-vertical-gap: 48px;
+
+    /* Radii */
+    --rounded-sm: 0.25rem;
+    --rounded-default: 0.5rem;
+    --rounded-md: 0.75rem;
+    --rounded-lg: 1rem;
+    --rounded-xl: 1.5rem;
+    --rounded-full: 9999px;
+
+    /* Ambient whispers shadow */
+    --shadow-ambient: 0 15px 30px rgba(80, 96, 82, 0.06);
+    --shadow-ambient-hover: 0 25px 45px rgba(80, 96, 82, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    font-family: var(--font-serif);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+}
+
+/* Poetic Centered Layout */
+.app-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--margin-desktop) var(--gutter);
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: var(--margin-mobile) var(--gutter);
+    }
+}
+
+/* Header & Utilitarian UI Frame */
+header {
+    margin-bottom: var(--poem-vertical-gap);
+    border-bottom: 1px solid var(--color-outline-variant);
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-label {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-on-surface-variant);
+}
+
+/* Poem Section (Literary Serif) */
+.poem-section {
+    margin-bottom: var(--poem-vertical-gap);
+    text-align: center;
+}
+
+.poem-title {
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+    .poem-title {
+        font-size: 28px;
+    }
+}
+
+.poem-body {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--color-on-surface);
+    white-space: pre-line;
+    margin-bottom: 40px;
+}
+
+/* Illustration Panel */
+.illustration-panel {
+    margin: var(--poem-vertical-gap) 0;
+    border-radius: var(--rounded-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-ambient);
+    border: 1px solid var(--color-outline-variant);
+}
+
+.illustration-panel img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Interactive Slider Section */
+.bridge-interactive {
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--rounded-lg);
+    padding: 32px;
+    margin: var(--poem-vertical-gap) 0;
+    text-align: center;
+    box-shadow: var(--shadow-ambient);
+}
+
+.bridge-title {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+/* Constellation slider visuals */
+.bridge-visuals {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 60px;
+    margin: 24px 0;
+    border-bottom: 1px dashed var(--color-outline);
+}
+
+.star-lover {
+    font-size: 28px;
+    position: absolute;
+    top: 10px;
+    transition: left 0.1s linear, right 0.1s linear;
+}
+
+#star-left {
+    left: 0%;
+}
+
+#star-right {
+    right: 0%;
+}
+
+/* Range input styled cleanly */
+.slider-container {
+    margin: 24px 0;
+}
+
+.poem-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--color-outline-variant);
+    outline: none;
+    border-radius: var(--rounded-full);
+}
+
+.poem-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    border: 2px solid var(--color-background);
+    box-shadow: 0 2px 6px rgba(80, 96, 82, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.poem-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.message-reveal {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--color-secondary);
+    min-height: 28px;
+    margin-top: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Guestbook Board */
+.guestbook-section {
+    margin-top: var(--poem-vertical-gap);
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: 40px;
+}
+
+.board-title {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-on-surface);
+    margin-bottom: 24px;
+}
+
+/* Guestbook Form */
+.guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+@media (max-width: 576px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+.input-minimal {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    padding: 12px 4px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-outline-variant);
+    color: var(--color-on-surface);
+    outline: none;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.input-minimal:focus {
+    border-bottom-color: var(--color-primary);
+}
+
+.input-minimal::placeholder {
+    color: var(--color-outline);
+    opacity: 0.6;
+}
+
+/* Tactile pebble-like button */
+.btn-pebble {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border: none;
+    border-radius: var(--rounded-xl);
+    cursor: pointer;
+    box-shadow: var(--shadow-ambient);
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.btn-pebble:hover {
+    background-color: var(--color-primary-container);
+    box-shadow: var(--shadow-ambient-hover);
+    transform: translateY(-1px);
+}
+
+/* Poem card container (Verset Style) */
+.letter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.letter-card {
+    background-color: transparent;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--rounded-lg);
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.letter-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-ambient);
+}
+
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.letter-author {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-on-surface);
+}
+
+.letter-tag {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background-color: rgba(123, 84, 85, 0.1);
+    color: var(--color-secondary);
+    padding: 4px 10px;
+    border-radius: var(--rounded-xl);
+}
+
+.letter-content {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+}
+
+/* Footer styling */
+footer {
+    margin-top: 80px;
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: 24px;
+    text-align: center;
+    color: var(--color-outline);
+    font-size: 12px;
+}
