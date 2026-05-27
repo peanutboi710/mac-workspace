@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM CRUD</title>
+    <script>
+
+    </script>
+</head>
+<body>
+    <h1>DOM CRUD</h1>
+    <p class = "dessert">버터떡</p>
+    <p class = "dessert" id = "dzk">두쫀쿠</p>
+    <div>
+        <p>봄동비빔밥</p>
+    </div>
+    <div id="container">
+        <h2>메모 등록</h2>
+        <form id = "form">
+            <input id="text"/>
+            <button>추가</button>
+        </form>
+        <div id="list">
+        </div>
+
+    </div>
+
+
+    <script>
+        //console.log("hello dom");
+        const p1 = document.querySelector("p");
+        console.log(p1);
+        const p2 = document.querySelectorAll("p");
+        console.log(...p2);
+        const p3 = document.querySelector("dzk");
+        console.log(p3);
+        const p4 = document.querySelectorAll(".dessert");
+        console.log(...p4);
+
+        const form = document.querySelector('#form');
+        console.log(form);
+        form.addEventListener("submit", (evt) => {
+            evt.preventDefault();
+            const list = document.querySelector('#list');
+            console.log(list);
+            list.append("<p>append something...</p>");
+        });
+
+    </script>
+</body>
+</html>
