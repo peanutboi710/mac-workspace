@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 시맨틱 태그 레이아웃 실습 (02-2)</title>
+    <!-- Google Fonts: Google Sans & Outfit / Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      /* Modern Reset & CSS Variable System */
+      :root {
+        --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --card-border: rgba(255, 255, 255, 0.08);
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --accent-purple: #818cf8;
+        --accent-pink: #f472b6;
+        --accent-teal: #2dd4bf;
+        --nav-hover: rgba(129, 140, 248, 0.15);
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --tag-bg: rgba(255, 255, 255, 0.05);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Global Semantic Guide Tag Badges */
+      .semantic-badge {
+        display: inline-block;
+        font-family: 'Outfit', monospace;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        color: #ffffff;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        box-shadow: 0 2px 10px rgba(129, 140, 248, 0.3);
+      }
+
+      /* Base Layout Elements */
+      header {
+        position: relative;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--card-border);
+        padding: 2rem 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+        z-index: 10;
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        background: linear-gradient(to right, #ffffff, var(--accent-purple), var(--accent-pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        max-width: 600px;
+      }
+
+      nav {
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--card-border);
+        padding: 0.8rem 5%;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      nav a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 0.5rem 1.2rem;
+        border-radius: 9999px;
+        transition: var(--transition-smooth);
+        border: 1px solid transparent;
+      }
+
+      nav a:hover {
+        background: var(--nav-hover);
+        color: var(--accent-purple);
+        border-color: rgba(129, 140, 248, 0.3);
+        transform: translateY(-2px);
+      }
+
+      nav a.active {
+        background: linear-gradient(135deg, var(--accent-purple), #4f46e5);
+        color: #ffffff;
+        box-shadow: 0 4px 15px rgba(129, 140, 248, 0.4);
+      }
+
+      /* Main Flex/Grid Layout */
+      main {
+        flex: 1;
+        width: 90%;
+        max-width: 1200px;
+        margin: 2.5rem auto;
+        display: grid;
+        grid-template-columns: 2.8fr 1.2fr;
+        gap: 2.5rem;
+      }
+
+      @media (max-width: 968px) {
+        main {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      /* Main Content Container (left side) */
+      .content-area {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      /* Semantic tag styling */
+      article {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 2.5rem;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+
+      article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--accent-purple), var(--accent-pink));
+      }
+
+      article:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(129, 140, 248, 0.15);
+        border-color: rgba(129, 140, 248, 0.2);
+      }
+
+      article h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      article p.meta {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 1rem;
+      }
+
+      article p.meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      article .intro-text {
+        font-size: 1.1rem;
+        color: #e2e8f0;
+        margin-bottom: 2rem;
+      }
+
+      /* Section inside Article */
+      section {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        transition: var(--transition-smooth);
+      }
+
+      section:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      section h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--accent-teal);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      section p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* Aside (right side) */
+      aside {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 2rem;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        transition: var(--transition-smooth);
+      }
+
+      aside:hover {
+        border-color: rgba(244, 114, 182, 0.2);
+        box-shadow: 0 15px 35px rgba(244, 114, 182, 0.1);
+      }
+
+      aside h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ffffff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 0.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Profile card in aside */
+      .profile-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.75rem;
+      }
+
+      .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+        padding: 3px;
+        box-shadow: 0 4px 15px rgba(129, 140, 248, 0.3);
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #1e1b4b;
+      }
+
+      .profile-name {
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #ffffff;
+      }
+
+      .profile-role {
+        font-size: 0.85rem;
+        color: var(--accent-teal);
+        background: rgba(45, 212, 191, 0.1);
+        padding: 2px 10px;
+        border-radius: 9999px;
+        font-weight: 600;
+      }
+
+      /* Tag lists */
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .tag-list span {
+        font-size: 0.8rem;
+        background: var(--tag-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--text-secondary);
+        padding: 4px 10px;
+        border-radius: 6px;
+        transition: var(--transition-smooth);
+      }
+
+      .tag-list span:hover {
+        background: var(--nav-hover);
+        color: var(--accent-purple);
+        border-color: rgba(129, 140, 248, 0.2);
+      }
+
+      /* Semantic explanations helper card */
+      .info-box {
+        background: rgba(129, 140, 248, 0.05);
+        border: 1px dashed rgba(129, 140, 248, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      .info-box strong {
+        color: var(--accent-purple);
+      }
+
+      /* Footer */
+      footer {
+        background: rgba(15, 23, 42, 0.8);
+        border-top: 1px solid var(--card-border);
+        padding: 2.5rem 5%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: auto;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      footer .social-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      footer .social-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: var(--transition-smooth);
+      }
+
+      footer .social-links a:hover {
+        color: var(--accent-pink);
+        transform: translateY(-2px);
+      }
+
+      footer p.copyright {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER AREA -->
+    <header>
+      <span class="semantic-badge">header</span>
+      <h1>WILLIAM PORTFOLIO</h1>
+      <p>HTML5 시맨틱 웹 표준 규격을 준수한 레이아웃 실습 페이지입니다.</p>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+      <span class="semantic-badge" style="position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); font-size: 0.65rem;">nav</span>
+      <a href="#about" class="active">About Me</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- MAIN BODY -->
+    <main>
+      <!-- LEFT CONTENT AREA -->
+      <div class="content-area">
+        <span class="semantic-badge" style="width: fit-content;">main</span>
+        
+        <!-- ARTICLE: Independent Self-contained Work -->
+        <article id="about">
+          <span class="semantic-badge">article</span>
+          <h2>시맨틱 웹 표준이란 무엇인가?</h2>
+          <p class="meta">
+            <span>📅 작성일: 2026년 5월 19일</span>
+            <span>✍️ 작성자: William</span>
+          </p>
+          
+          <div class="intro-text">
+            시맨틱 태그(Semantic Tag)는 브라우저와 개발자 모두에게 엘리먼트의 명확한 '의미'를 설명하는 태그입니다.
+            단순히 레이아웃을 구분하는 <code>&lt;div&gt;</code> 대신 적절한 시맨틱 태그를 활용함으로써 검색엔진 최적화(SEO) 및 접근성(Accessibility)을 극대화할 수 있습니다.
+          </div>
+
+          <!-- SECTION: Theme-specific content within Article -->
+          <section>
+            <span class="semantic-badge">section</span>
+            <h3>1. header, nav, main, footer</h3>
+            <p>
+              웹페이지 전체의 뼈대를 형성하는 핵심 구성원입니다. <code>&lt;header&gt;</code>는 서비스의 제목과 소개를, 
+              <code>&lt;nav&gt;</code>는 주요 네비게이션 메뉴를, <code>&lt;main&gt;</code>은 사이트의 유일무이한 핵심 콘텐츠 영역을, 
+              <code>&lt;footer&gt;</code>는 저작권 및 주소 등의 부가정보를 명시합니다.
+            </p>
+          </section>
+
+          <!-- SECTION: Theme-specific content within Article -->
+          <section>
+            <span class="semantic-badge">section</span>
+            <h3>2. article vs section</h3>
+            <p>
+              <code>&lt;article&gt;</code>은 독립적으로 배포 및 재사용이 가능한 독립된 콘텐츠(블로그 포스트, 뉴스 기사, 댓글 등)에 사용합니다. 
+              반면 <code>&lt;section&gt;</code>은 문서의 일반적인 섹션(테마별 묶음)을 구분하기 위해 사용하며, 보통 내부에 제목(h1~h6)을 포함하는 것이 좋은 관례입니다.
+            </p>
+          </section>
+        </article>
+
+        <!-- Another Article (Simulated Blog Post) -->
+        <article id="portfolio">
+          <span class="semantic-badge">article</span>
+          <h2>프로젝트 실습 포트폴리오</h2>
+          <p class="meta">
+            <span>📅 업데이트: 오늘</span>
+            <span>📂 분류: Frontend Development</span>
+          </p>
+          
+          <div class="intro-text">
+            웹 표준 레이아웃 설계 능력을 키우기 위한 시맨틱 마크업 연습 결과물들입니다.
+          </div>
+
+          <section>
+            <span class="semantic-badge">section</span>
+            <h3>프론트엔드 모던 레이아웃 구현</h3>
+            <p>
+              CSS Grid와 Flexbox를 조화롭게 융합하여 미려하고 유연한 그리드 시스템을 마크업했습니다.
+              해당 프로젝트는 시맨틱 웹 표준 규격을 완전히 준수하여 제작되었습니다.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- RIGHT SIDEBAR (ASIDE) -->
+      <aside>
+        <span class="semantic-badge" style="width: fit-content;">aside</span>
+        
+        <div class="profile-card">
+          <div class="avatar">
+            <img src="https://picsum.photos/100/100" alt="William Profile" />
+          </div>
+          <div class="profile-name">윌리엄 (William)</div>
+          <div class="profile-role">Frontend Specialist</div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary);">
+            현대적인 웹 브라우징 환경에서 최상의 사용자 경험(UX)과 아름다운 웹 인터페이스를 설계합니다.
+          </p>
+        </div>
+
+        <div>
+          <h3>핵심 기술 스택</h3>
+          <div class="tag-list">
+            <span>HTML5 (Semantic)</span>
+            <span>CSS3 (Modern Layout)</span>
+            <span>Vanilla JS</span>
+            <span>Responsive Design</span>
+            <span>SEO Optimization</span>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>Aside의 역할:</strong><br />
+          본문의 핵심 흐름과는 약간 분리된 주변부 콘텐츠(광고, 프로필, 최근 글 목록, 카테고리 등)를 표현하는 영역입니다.
+        </div>
+      </aside>
+    </main>
+
+    <!-- FOOTER AREA -->
+    <footer>
+      <span class="semantic-badge">footer</span>
+      <div class="social-links">
+        <a href="#github">GitHub</a>
+        <a href="#blog">Velog</a>
+        <a href="#linkedin">LinkedIn</a>
+      </div>
+      <p>연락처: contact@william.dev | 서울시 마포구 신촌로</p>
+      <p class="copyright">© 2026 William. All Rights Reserved. Designed with elegance & semantics.</p>
+    </footer>
+  </body>
+</html>
