@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Hater's Club</title>
+    <style>
+        body {
+            background-color: #000080;
+            color: #ffff00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid #ff0000;
+            padding: 20px;
+            background-color: #000033;
+            box-shadow: 0 0 15px #ff0000;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ff0000;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 30px;
+        }
+        
+        .marquee {
+            background-color: #ff0000;
+            color: #ffff00;
+            padding: 10px;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 2px dashed #ffff00;
+        }
+        
+        .content {
+            background-color: #000066;
+            border: 2px solid #00ffff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .reason {
+            background-color: #330000;
+            border-left: 5px solid #ff0000;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        
+        .counter {
+            text-align: center;
+            font-size: 24px;
+            color: #00ff00;
+            background-color: #003300;
+            padding: 15px;
+            border: 2px solid #00ff00;
+            margin: 20px 0;
+        }
+        
+        .button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffff00;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid #ffff00;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: #ffff00;
+            color: #ff0000;
+        }
+        
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #cccccc;
+        }
+        
+        .gif-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .gif-placeholder {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: #ff00ff;
+            border: 2px solid #ffff00;
+            margin: 10px;
+            line-height: 100px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="blink">SUMMER HATER'S CLUB</h1>
+        
+        <div class="marquee">
+            <marquee behavior="scroll" direction="left">❄️ WELCOME TO THE ONLY SITE THAT TRULY HATES SUMMER ❄️ WHY IS IT SO HOT? ❄️ SAVE US FROM THE HEAT ❄️ SUMMER IS THE WORST ❄️</marquee>
+        </div>
+        
+        <div class="content">
+            <h2>WHY WE HATE SUMMER:</h2>
+            
+            <div class="reason">
+                <h3>🔥 IT'S TOO HOT 🔥</h3>
+                <p>Temperatures rise to unbearable levels. Who wants to sweat buckets just walking outside?</p>
+            </div>
+            
+            <div class="reason">
+                <h3>🦟 BUGS EVERYWHERE 🦟</h3>
+                <p>Mosquitoes, flies, and other annoying insects come out to ruin our lives.</p>
+            </div>
+            
+            <div class="reason">
+                <h3>🥵 SUNBURN NIGHTMARES 🥵</h3>
+                <p>One wrong step outside and you're red as a tomato for weeks.</p>
+            </div>
+            
+            <div class="reason">
+                <h3>💸 EXPENSIVE COOLING 💸</h3>
+                <p>Electric bills skyrocket just to keep the AC running.</p>
+            </div>
+            
+            <div class="reason">
+                <h3>🏖️ TRAPPED INDOORS 🏖️</h3>
+                <p>Summer forces us inside, away from our computers and hobbies.</p>
+            </div>
+        </div>
+        
+        <div class="counter">
+            DAYS UNTIL WINTER: <span id="countdown">127</span>
+        </div>
+        
+        <div class="gif-container">
+            <div class="gif-placeholder">SNOW GIF</div>
+            <div class="gif-placeholder">ICE CREAM MELTING (BACKWARDS)</div>
+            <div class="gif-placeholder">FROSTY THE SNOWMAN</div>
+        </div>
+        
+        <a href="#" class="button" onclick="hateSummer()">DECLARE SUMMER HATRED</a>
+        
+        <div class="content">
+            <h2>JOIN OUR MOVEMENT</h2>
+            <p>Sign our petition to ban summer forever:</p>
+            <form>
+                <input type="text" placeholder="Your Name" style="width: 100%; padding: 5px; margin: 5px 0;">
+                <input type="email" placeholder="Your Email" style="width: 100%; padding: 5px; margin: 5px 0;">
+                <textarea placeholder="Why do you hate summer?" style="width: 100%; height: 80px; padding: 5px; margin: 5px 0;"></textarea>
+                <input type="submit" value="JOIN THE HATERS" style="width: 100%; padding: 10px; background-color: #ff0000; color: #ffff00; font-weight: bold; border: 2px solid #ffff00;">
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>© 1997 SUMMER HATER'S CLUB - ALL RIGHTS RESERVED</p>
+            <p>THIS SITE BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 AT 800x600 RESOLUTION</p>
+            <p>LAST UPDATED: JULY 15TH, 1997</p>
+        </div>
+    </div>
+    
+    <script>
+        function hateSummer() {
+            alert("SUMMER HATRED DECLARED! WINTER WILL COME SOONER!");
+        }
+        
+        // Simulate countdown
+        setInterval(function() {
+            var countdown = document.getElementById("countdown");
+            var current = parseInt(countdown.textContent);
+            countdown.textContent = current - 1;
+            if (current <= 1) {
+                countdown.textContent = "365";
+            }
+        }, 10000);
+    </script>
+</body>
+</html>
