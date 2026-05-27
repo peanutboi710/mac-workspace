@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#eae7e7",
+                    "on-secondary-fixed": "#2f1314",
+                    "tertiary-fixed-dim": "#c9c6c1",
+                    "on-primary-fixed-variant": "#3b4b3d",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#303030",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e4e2e1",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1b1c1c",
+                    "inverse-primary": "#b9cbb9",
+                    "surface-container-low": "#f6f3f2",
+                    "background": "#fcf9f8",
+                    "on-tertiary-fixed-variant": "#474743",
+                    "on-primary-container": "#f6fff4",
+                    "secondary-fixed-dim": "#ecbbba",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#5d5c58",
+                    "secondary-container": "#fdcbcb",
+                    "surface-tint": "#526254",
+                    "primary": "#506052",
+                    "surface-container-highest": "#e4e2e1",
+                    "tertiary-fixed": "#e5e2dc",
+                    "inverse-on-surface": "#f3f0f0",
+                    "surface-dim": "#dcd9d9",
+                    "on-surface": "#1b1c1c",
+                    "on-surface-variant": "#434843",
+                    "surface": "#fcf9f8",
+                    "primary-fixed-dim": "#b9cbb9",
+                    "tertiary-container": "#767470",
+                    "outline-variant": "#c3c8c1",
+                    "primary-fixed": "#d5e7d5",
+                    "on-tertiary-container": "#fdffdf",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#603d3e",
+                    "primary-container": "#687969",
+                    "on-primary-fixed": "#101f13",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-fixed": "#ffdad9",
+                    "secondary": "#7b5455",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "outline": "#747872",
+                    "on-secondary-container": "#795354"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "margin-mobile": "24px",
+                    "poem-vertical-gap": "48px",
+                    "gutter": "16px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "poem-body": ["Literata", "serif"],
+                    "poem-display": ["Literata", "serif"],
+                    "caption": ["Literata", "serif"],
+                    "ui-label-lg": ["DM Sans", "sans-serif"],
+                    "ui-label-sm": ["DM Sans", "sans-serif"],
+                    "poem-display-mobile": ["Literata", "serif"]
+            },
+            "fontSize": {
+                    "poem-body": ["20px", {"lineHeight": "1.8", "fontWeight": "400"}],
+                    "poem-display": ["40px", {"lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "caption": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "ui-label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "ui-label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                    "poem-display-mobile": ["28px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            background-image: radial-gradient(#eceae9 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        .poem-card-transition {
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .ambient-whisper {
+            box-shadow: 0 10px 40px -10px rgba(80, 96, 82, 0.08);
+        }
+        .progress-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #506052, transparent);
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-ui-label-sm text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md dark:bg-background/80 flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed hover:opacity-70 transition-opacity cursor-pointer active:scale-95 duration-200" data-icon="menu_book">menu_book</span>
+<h1 class="font-poem-display text-poem-display-mobile md:text-poem-display text-primary dark:text-primary-fixed italic select-none">Verset</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant dark:text-on-surface-variant hover:opacity-70 transition-opacity" data-icon="search">search</button>
+<button class="material-symbols-outlined text-on-surface-variant dark:text-on-surface-variant hover:opacity-70 transition-opacity" data-icon="account_circle">account_circle</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center pt-24 pb-32 px-margin-mobile md:px-0">
+<div class="max-w-[720px] w-full text-center space-y-poem-vertical-gap">
+<!-- Progress Indicator -->
+<div class="w-24 mx-auto mb-12">
+<div class="progress-line mx-auto" id="loading-bar"></div>
+</div>
+<!-- Poem Container -->
+<article class="poem-card-transition opacity-100 transform translate-y-0" id="poem-content">
+<h2 class="font-poem-display text-poem-display-mobile md:text-poem-display text-primary mb-12 tracking-tight">
+                    침묵의 정원
+                </h2>
+<div class="font-poem-body text-poem-body text-on-surface-variant space-y-6 italic">
+<p>그늘이 길게 늘어지는 시간,<br/>우리는 이름 없는 꽃들 사이에 앉아<br/>바람이 실어오는 먼 기억을 듣습니다.</p>
+<p>말하지 않아도 가득한 것들,<br/>부서진 햇살이 수면 위를 구르고<br/>지나간 계절은 뿌리 끝에 머뭅니다.</p>
+<p>여기, 마음의 소음이 잦아드는 곳<br/>오직 숨결만이 유일한 문장이 되어<br/>우리는 비로소 고요를 완성합니다.</p>
+</div>
+<div class="mt-12 flex items-center justify-center gap-2">
+<span class="bg-secondary/10 text-secondary px-4 py-1 rounded-full font-ui-label-sm text-ui-label-sm uppercase tracking-widest">Nature</span>
+<span class="bg-secondary/10 text-secondary px-4 py-1 rounded-full font-ui-label-sm text-ui-label-sm uppercase tracking-widest">Solitude</span>
+</div>
+</article>
+<!-- Action Cluster -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-12">
+<button class="group flex items-center gap-3 bg-primary text-on-primary px-8 py-3 rounded-full font-ui-label-lg text-ui-label-lg hover:opacity-90 active:scale-95 transition-all duration-200 ambient-whisper" onclick="regeneratePoem()">
+<span class="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500" data-icon="refresh">refresh</span>
+<span>다시 생성하기</span>
+</button>
+<button class="flex items-center gap-3 border border-outline/30 text-primary px-8 py-3 rounded-full font-ui-label-lg text-ui-label-lg hover:bg-surface-container-low active:scale-95 transition-all duration-200" id="save-btn" onclick="toggleSave()">
+<span class="material-symbols-outlined" data-icon="bookmark" id="save-icon">bookmark</span>
+<span>저장하기</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Decorative Illustration Background (Subtle) -->
+<div class="fixed top-1/2 left-10 -translate-y-1/2 opacity-5 pointer-events-none hidden lg:block">
+<img class="w-64 h-auto" data-alt="A minimalist ink wash illustration of a single, delicate willow tree with thin, sweeping branches. The style is traditional East Asian calligraphy, using only shades of charcoal grey on a textured parchment paper background. The mood is solitary, quiet, and deeply poetic, mirroring the quietude brand philosophy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPn2vVs8RlvXauW3dzEscBbGcOqtv-g4kIZ27VA43bvU3lTNSGl542UCHTWx34_iXgCjBCW4BL93Q8u5op22FKJfa10lonDIo6qzkf8AFIlS08N9g4NJwXbSH-ke6eBzhdKc9jPFy0fCTkFeiWcHSEELrggYqQ7kNp3HU4GEe47jlV2HgIq2tz8E7RsemkJL_fApFmowkaXOGJ-VEKPiTcylbL3SA1CqZnFwZqsOY8stTYnnTSsnil-uILErJiP3P9Tqk6ip9TRxE"/>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-4 px-margin-mobile bg-background/80 backdrop-blur-md dark:bg-background/80 shadow-sm dark:shadow-none">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 dark:text-on-surface-variant/60 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-ui-label-sm text-ui-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-bold active:translate-y-[-2px] transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome" data-weight="fill">auto_awesome</span>
+<span class="font-ui-label-sm text-ui-label-sm mt-1">Create</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 dark:text-on-surface-variant/60 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-ui-label-sm text-ui-label-sm mt-1">Library</span>
+</a>
+</nav>
+<script>
+        const poems = [
+            {
+                title: "새벽의 필사",
+                content: "<p>잉크가 마르기 전의 문장은<br>어젯밤 꾸었던 꿈의 온도와 같습니다.</p><p>당신의 손끝에서 흘러나온 것들이<br>종이 위에 가느다란 길을 내고</p><p>우리는 그 길을 따라 걷다 보면<br>어느새 아침의 창가에 닿습니다.</p>",
+                tags: ["Writing", "Morning"]
+            },
+            {
+                title: "침묵의 정원",
+                content: "<p>그늘이 길게 늘어지는 시간,<br>우리는 이름 없는 꽃들 사이에 앉아<br>바람이 실어오는 먼 기억을 듣습니다.</p><p>말하지 않아도 가득한 것들,<br>부서진 햇살이 수면 위를 구르고<br>지나간 계절은 뿌리 끝에 머뭅니다.</p><p>여기, 마음의 소음이 잦아드는 곳<br>오직 숨결만이 유일한 문장이 되어<br>우리는 비로소 고요를 완성합니다.</p>",
+                tags: ["Nature", "Solitude"]
+            },
+            {
+                title: "겨울의 빛",
+                content: "<p>가장 시린 계절에 피어난 빛은<br>가장 투명한 눈물을 닮았습니다.</p><p>얼어붙은 창문을 두드리는 햇살이<br>단단한 침묵을 조금씩 녹여내면</p><p>보이지 않던 봄의 전령들이<br>얼음 밑에서 낮은 노래를 부릅니다.</p>",
+                tags: ["Winter", "Hope"]
+            }
+        ];
+
+        function regeneratePoem() {
+            const container = document.getElementById('poem-content');
+            const loader = document.getElementById('loading-bar');
+            
+            // Start Loading
+            loader.style.width = '100%';
+            container.classList.add('opacity-0', 'translate-y-4');
+            
+            setTimeout(() => {
+                const randomPoem = poems[Math.floor(Math.random() * poems.length)];
+                
+                container.innerHTML = `
+                    <h2 class="font-poem-display text-poem-display-mobile md:text-poem-display text-primary mb-12 tracking-tight">
+                        ${randomPoem.title}
+                    </h2>
+                    <div class="font-poem-body text-poem-body text-on-surface-variant space-y-6 italic">
+                        ${randomPoem.content}
+                    </div>
+                    <div class="mt-12 flex items-center justify-center gap-2">
+                        ${randomPoem.tags.map(tag => `<span class="bg-secondary/10 text-secondary px-4 py-1 rounded-full font-ui-label-sm text-ui-label-sm uppercase tracking-widest">${tag}</span>`).join('')}
+                    </div>
+                `;
+                
+                // Reset View
+                container.classList.remove('opacity-0', 'translate-y-4');
+                loader.style.width = '0%';
+            }, 800);
+        }
+
+        let isSaved = false;
+        function toggleSave() {
+            isSaved = !isSaved;
+            const btn = document.getElementById('save-btn');
+            const icon = document.getElementById('save-icon');
+            const text = btn.querySelector('span:last-child');
+
+            if (isSaved) {
+                btn.classList.add('bg-secondary', 'text-on-secondary');
+                btn.classList.remove('text-primary');
+                icon.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+                text.innerText = '저장됨';
+            } else {
+                btn.classList.remove('bg-secondary', 'text-on-secondary');
+                btn.classList.add('text-primary');
+                icon.setAttribute('style', "font-variation-settings: 'FILL' 0;");
+                text.innerText = '저장하기';
+            }
+        }
+
+        // Initialize loading animation on first load
+        window.onload = () => {
+            const loader = document.getElementById('loading-bar');
+            loader.style.width = '40%';
+            setTimeout(() => { loader.style.width = '0%'; }, 1000);
+        };
+    </script>
+</body></html>

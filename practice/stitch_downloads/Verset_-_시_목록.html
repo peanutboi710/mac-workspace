@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verset - Your Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed": "#2f1314",
+                        "tertiary-fixed-dim": "#c9c6c1",
+                        "on-primary-fixed-variant": "#3b4b3d",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e4e2e1",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "inverse-primary": "#b9cbb9",
+                        "surface-container-low": "#f6f3f2",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#474743",
+                        "on-primary-container": "#f6fff4",
+                        "secondary-fixed-dim": "#ecbbba",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#5d5c58",
+                        "secondary-container": "#fdcbcb",
+                        "surface-tint": "#526254",
+                        "primary": "#506052",
+                        "surface-container-highest": "#e4e2e1",
+                        "tertiary-fixed": "#e5e2dc",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#434843",
+                        "surface": "#fcf9f8",
+                        "primary-fixed-dim": "#b9cbb9",
+                        "tertiary-container": "#767470",
+                        "outline-variant": "#c3c8c1",
+                        "primary-fixed": "#d5e7d5",
+                        "on-tertiary-container": "#fdffdf",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#603d3e",
+                        "primary-container": "#687969",
+                        "on-primary-fixed": "#101f13",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-fixed": "#ffdad9",
+                        "secondary": "#7b5455",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "outline": "#747872",
+                        "on-secondary-container": "#795354"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "24px",
+                        "poem-vertical-gap": "48px",
+                        "gutter": "16px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "poem-body": ["Literata"],
+                        "poem-display": ["Literata"],
+                        "caption": ["Literata"],
+                        "ui-label-lg": ["DM Sans"],
+                        "ui-label-sm": ["DM Sans"],
+                        "poem-display-mobile": ["Literata"]
+                    },
+                    "fontSize": {
+                        "poem-body": ["20px", {"lineHeight": "1.8", "fontWeight": "400"}],
+                        "poem-display": ["40px", {"lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "caption": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "ui-label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "ui-label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                        "poem-display-mobile": ["28px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .poem-card-hover:hover {
+            box-shadow: 0 10px 40px -15px rgba(80, 96, 82, 0.08);
+            transform: translateY(-2px);
+        }
+        /* Custom Scrollbar for the Poetic Feel */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d5e7d5; border-radius: 10px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary hover:opacity-70 transition-opacity cursor-pointer">menu_book</span>
+<h1 class="font-poem-display text-poem-display-mobile md:text-poem-display text-primary italic">Verset</h1>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-70 transition-opacity active:scale-95 duration-200">search</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A professional portrait of a person with a serene expression, shot in soft natural light against a neutral studio background. The aesthetic is clean and minimalist, following a light-mode color palette of soft creams and warm greys. High-end photography style with a shallow depth of field, emphasizing a calm and intellectual persona suitable for a poetry app user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlx4WJ5JiEpBWLVj-9L6Gqq48xFxfkL8FnqSpKnn-dc3mjxN00E0JmjNGX3JWRfXl7lQ7eHOFHBZI7bMQYxj6ikvod0e64NSlldhUrjfDMGctvzH28TrW5wEL4iVl0HxZosWV8jfgX1On1fqNoiHj6I3gIvYJeP1NWe99kZbvCJ21Y4e96pt7DpC0PKNLz8N45tMvkvks0iZv_S9gSyYoyZzz92u75zdSaW64Cv8PGjaPOwq35klHWSpektgT0CZhXw7OBQ6WI4FE"/>
+</div>
+</div>
+</header>
+<!-- Main Content: Library Gallery -->
+<main class="pt-24 pb-32 max-w-[720px] mx-auto px-margin-mobile md:px-0">
+<header class="mb-12">
+<h2 class="font-poem-display text-poem-display-mobile md:text-poem-display text-on-background mb-2">Library</h2>
+<p class="font-caption text-caption text-on-surface-variant italic">A collection of your quiet moments and whispered stanzas.</p>
+</header>
+<!-- Filters/Chips -->
+<div class="flex flex-wrap gap-2 mb-poem-vertical-gap">
+<span class="px-4 py-1.5 rounded-full bg-primary-container text-on-primary-container font-ui-label-sm text-ui-label-sm cursor-pointer">All Poems</span>
+<span class="px-4 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-ui-label-sm text-ui-label-sm hover:bg-secondary-container/50 transition-colors cursor-pointer">Solitude</span>
+<span class="px-4 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-ui-label-sm text-ui-label-sm hover:bg-secondary-container/50 transition-colors cursor-pointer">Nature</span>
+<span class="px-4 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-ui-label-sm text-ui-label-sm hover:bg-secondary-container/50 transition-colors cursor-pointer">Morning</span>
+</div>
+<!-- Poem List -->
+<div class="space-y-gutter">
+<!-- Poem Card 1 -->
+<article class="group relative p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant/30 transition-all duration-300 poem-card-hover cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="font-caption text-caption text-on-surface-variant/60">October 24, 2023</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary transition-colors">more_vert</span>
+</div>
+<h3 class="font-poem-display text-[24px] leading-tight text-on-surface mb-3">The Quiet Morning</h3>
+<p class="font-poem-body text-[18px] text-on-surface-variant line-clamp-3 italic mb-6">
+                    Light filters through the dust motes, dancing on the floorboards like memories of a summer long since passed. The kettle hums a low tune...
+                </p>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-secondary text-[11px] font-medium tracking-wider uppercase">Nature</span>
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-secondary text-[11px] font-medium tracking-wider uppercase">Haiku</span>
+</div>
+</article>
+<!-- Poem Card 2 -->
+<article class="group relative p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant/30 transition-all duration-300 poem-card-hover cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="font-caption text-caption text-on-surface-variant/60">October 21, 2023</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary transition-colors">more_vert</span>
+</div>
+<h3 class="font-poem-display text-[24px] leading-tight text-on-surface mb-3">Echoes of the Shore</h3>
+<p class="font-poem-body text-[18px] text-on-surface-variant line-clamp-3 italic mb-6">
+                    Salt spray and the rhythmic pulse of the tide. We spoke in half-sentences, letting the sea finish our thoughts. The horizon is a line drawn in charcoal...
+                </p>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-secondary text-[11px] font-medium tracking-wider uppercase">Solitude</span>
+</div>
+</article>
+<!-- Poem Card 3 - Featured style -->
+<div class="py-8">
+<div class="w-full h-[240px] rounded-xl overflow-hidden relative mb-4 group">
+<img alt="Forest Mist" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A wide, atmospheric landscape of a misty forest at dawn. The lighting is soft and ethereal, with cool blues and muted greens dominating the palette. A single bird is captured in flight, silhouetted against the hazy sun. The mood is one of profound peace and cinematic quietude, perfectly reflecting a poetic and minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg7qW5qaB2bFXZ_XzfbrIZgdNKX2gQnWDhAYKNV1J4ilshv73Oj1tN5HaRY1x4Hw8UbpcpOqH4abnFvhqytUC0F3omF2-aoKO1X-ccp05HUmino7ellCfqWGqlTgczh2HHyNn4sWgh0bGF5zjJqGOaklVupviRyAyd7JPoj7njjEXMovmxui6fAnw9ZqqoGGE5-0cVIgkk3jR-FIN-3tr6aDvRDcAg8SmiWL4A6MBm3i1LIbPIuGbMjk3oOeoRqdAicsj2NmRrtfg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute bottom-6 left-8">
+<span class="px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md text-on-primary-fixed text-[11px] font-bold tracking-widest uppercase mb-2 inline-block">Editor's Pick</span>
+<h3 class="font-poem-display text-[28px] text-on-background">The Sun Beneath the Fog</h3>
+</div>
+</div>
+<article class="p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant/30 transition-all duration-300 poem-card-hover cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="font-caption text-caption text-on-surface-variant/60">October 18, 2023</span>
+<span class="material-symbols-outlined text-on-surface-variant/40">more_vert</span>
+</div>
+<p class="font-poem-body text-[18px] text-on-surface-variant line-clamp-3 italic">
+                        Hidden truths are often the most beautiful. In the gray expanse, we find the colors we forgot we knew...
+                    </p>
+</article>
+</div>
+<!-- Poem Card 4 -->
+<article class="group relative p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant/30 transition-all duration-300 poem-card-hover cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="font-caption text-caption text-on-surface-variant/60">October 15, 2023</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary transition-colors">more_vert</span>
+</div>
+<h3 class="font-poem-display text-[24px] leading-tight text-on-surface mb-3">Midnight Ink</h3>
+<p class="font-poem-body text-[18px] text-on-surface-variant line-clamp-3 italic mb-6">
+                    The moon is a cold coin tossed into the well of the sky. I write because the stars are too far to reach, and the paper is right here...
+                </p>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-secondary text-[11px] font-medium tracking-wider uppercase">Night</span>
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-secondary text-[11px] font-medium tracking-wider uppercase">Reflective</span>
+</div>
+</article>
+</div>
+<!-- End of List Indicator -->
+<div class="mt-24 mb-12 flex flex-col items-center opacity-30">
+<span class="material-symbols-outlined text-primary mb-4">flight</span>
+<p class="font-caption text-caption">The end of the current chapter.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-4 px-margin-mobile bg-background/80 backdrop-blur-md shadow-sm dark:shadow-none">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 dark:text-on-surface-variant/60 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-ui-label-sm text-ui-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 dark:text-on-surface-variant/60 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">auto_awesome</span>
+<span class="font-ui-label-sm text-ui-label-sm">Create</span>
+</a>
+<a class="active-tab flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-bold transition-transform duration-300 translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span class="font-ui-label-sm text-ui-label-sm">Library</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic for card clicks
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('click', () => {
+                // Potential navigation to poem detail
+                card.style.opacity = '0.7';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                }, 200);
+            });
+        });
+
+        // Atmosphere: Subtle parallax or fade in on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('article').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(el);
+        });
+    </script>
+</body></html>
