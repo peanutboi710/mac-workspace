@@ -7,23 +7,24 @@
 </head>
 <body>
     <div>
-        <h1>DOM 조회</h1>
-        <p class="job">전사</p>
-        <p class="job">마법사</p>
-        <p class="job" id="healer">healer</p>
-        <p>모험가</p>
+        <button onclick="addBox()">버튼</button>
+        <h1>+elements+</h1>
+        <div id=#container></div>
     </div>
     <script>
-        const p1 = document.querySelector("p");
-        console.log(p1);
-        const p2 = document.querySelectorAll("p");
-        console.log(p2(1));
-        console.log(...p2);
-        const p3 = document.querySelectorAll("healer");
-        console.log(p3);
-        const p4 = document.querySelectorAll(".job");
-        console.log(...p4);
-    </script>
+        const container = document.querySelector("#container");
+
+        function addBox() {
+            // console.log("add Box~");
+            const content = prompt("insert content");
+            console.log(content);
+            const box = document.createElement("p");
+            // box.innerHTML = 
+            /* box.innerText = content;
+            console.log(box.innerText); */
+            box.textContent = content;
+            container.append(box);
+        }
 
 </body>
 </html>
