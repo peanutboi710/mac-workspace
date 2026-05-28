@@ -6,6 +6,7 @@
     <title>Bom</title>
 </head>
 <body>
+    <div style="background-color: limegreen;" height: 100px; width: 100px></div>
     <script>
         console.log(this);
         console.log(globalThis);
@@ -29,6 +30,13 @@
         );
         setInterval(() => console.log("setInterval"), 1000);
         
+        console.log(window.innerWidth);
+        console.log(window.innerHeight);
+        console.log(window.outerWidth);
+        console.log(window.outerHeight);
+        console.log(window.scrollX);
+        console.log(window.scrollY);
+        setInterval(() => scrollBy(0,50), 1000);
     </script>
 </body>
 </html>
