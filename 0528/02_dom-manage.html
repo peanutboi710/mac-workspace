@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM CRUM</title>
+</head>
+<body>
+    <div>
+        <h1>DOM 조회</h1>
+        <p class="job">전사</p>
+        <p class="job">마법사</p>
+        <p class="job" id="healer">healer</p>
+        <p>모험가</p>
+    </div>
+    <script>
+        const p1 = document.querySelector("p");
+        console.log(p1);
+        const p2 = document.querySelectorAll("p");
+        console.log(p2(1));
+        console.log(...p2);
+        const p3 = document.querySelectorAll("healer");
+        console.log(p3);
+        const p4 = document.querySelectorAll(".job");
+        console.log(...p4);
+    </script>
+
+</body>
+</html>
