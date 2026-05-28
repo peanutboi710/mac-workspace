@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스토</title>
+</head>
+<body>
+    <button id="copy">copy</button>
+    <script>
+        //sessionStorage.setItem("counter", 0)
+        //sessionStorage.setItem("counter")
+        //console.log(sessionStorage.getItem("counter"))
+        let a = sessionStorage.getItem("counter") ?? 0;
+        a++;
+        console.log("sessionstorage", a);
+        sessionStorage.setItem("counter", a);
+        
+        let b = localStorage.getItem("counter") ?? 0;
+        b++;
+        console.log("localstorage", b);
+        localStorage.setItem("counter", b);
+
+        window.addEventListener("storage", () => {
+            console.log("storage event!");
+        });
+
+        const o = {
+            name: "William",
+            job: "Wizard",
+        }
+        localStorage.setItem("o", o);
+        localStorage.setItem("o2", JSON.stringify(o));
+        console.log(localStorage.getItem("o"));
+        console.log(localStorage.getItem("o2"));
+        console.log(JSON.parse(localStorage.getItem("o2")))
+        const aa = ["a", "b", "c"];
+        localStorage.setItem("aa", aa);
+        localStorage.setItem("aa2", JSON.stringify(aa));
+        const aa2 = JSON.parse(localStorage.getItem("aa"));
+        console.log(aa2aa2);
+        localStorage.setItem("aa2", JSON.stringify(aa));
+
+        document.querySelector("#copy").addEventListener("click", () => {
+            console.log(`기존 데이터 : ${await navigator.clipboard.readText()}`);
+            console.log("부자가 되는 방법이 복사가 되었습니다");
+            navigator.clipboard.writeText("부자가 되는 방법");
+        });
+    </script>
+
+</body>
+</html>
