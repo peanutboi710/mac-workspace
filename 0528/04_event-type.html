@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event type</title>
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOM Loaded")
+            const btn = document.querySelector("#btn");
+            console.log(btn)
+        });
+    </script>
+    <button id="btn">click</button>
+    <input type="text" id="i1" />
+    <p id="p1"> </p>
+    <script>
+        const i1 = document.querySelector("#i1");
+        const p1 = document.querySelector("#p1");
+        i1.addEventListener("input", (event) =>{
+            console.log(event);
+            console.log("입력중");
+        });
+        i1.addEventListener("change", (event) => {
+            console.log("변화가 있음")
+        });
+    </script>
+</body>
+</html>
