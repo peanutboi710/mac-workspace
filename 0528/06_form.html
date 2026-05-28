@@ -6,6 +6,32 @@
     <title>form</title>
 </head>
 <body>
-    
+    <form id="joinForm"
+    style="
+    display: flex;
+    flex-direction: column;
+    gap: 10px;;
+    ">
+        <label>유저네임 : <input id="username" required />
+        </label>
+        <label>비밀번호 : <input id="password" required />
+        </label>
+        <button>submit</button>
+    </form>
+    <script>
+        const form = document.querySelector("#joinForm");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            console.log(event.target);
+            console.log(event.target.username);
+            console.log(event.target.password);
+            console.log("submit");
+            const formData = new formData(event.target);
+            console.log(formData.get("username"));
+            console.log(formData.get("password"));
+            console.log(...formData);
+            console.log(Object.fromEntries(formData));
+        });
+    </script>
 </body>
 </html>
