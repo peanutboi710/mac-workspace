@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM CRUM</title>
+    <style>
+        .switch {
+            background-color: greenyellow;
+        }
+        .border {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -23,7 +31,18 @@
             /* box.innerText = content;
             console.log(box.innerText); */
             box.textContent = content;
+            box.title = "title";
+            box["id"] = "myid";
+            // box.className = "switch border";
+            box.classList.add("switch");
+            box.classList.add("border");
+            console.log(box.classList);
             container.append(box);
+            const deleteButton = document.createElement("button");
+            box.append(deleteButton);
+            deleteButton.addEventListener("click", () => (
+                box.remove()
+            ))
         }
 
 </body>
