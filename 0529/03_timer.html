@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+</head>
+<body>
+    <button onclick="delay()">wait</button>
+
+    <script>
+        function delay() {
+            const timerId = setTimeout{() => console.log("5s passed"), 5000};
+            console.log(timerId);
+            document
+            .querySelector("#stopper");
+            .addEventListener("click", () => {
+                console.log(`timer ${timerId} stopped`);
+                clearTimeout(timerId);
+            });
+
+            
+        }
+
+        let counter = 0;
+            const timerId2 = setInterval(() => {
+                counter++;
+                console.log(counter);
+            }, 1000);
+            document.querySelector("#stopper"). 
+        
+    </script>
+</body>
+</html>

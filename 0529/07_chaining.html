@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chaining</title>
+</head>
+<body>
+    <script>
+        function delay(ms){
+            return new Promise(
+                resolve => setTimeout(resolve, ms));
+        }
+        delay(1000)
+        //.then(() => console.log("1s passed"));
+        .then(() => {
+            if (Matha.random()>0.5) {
+                console.log("success");
+            } else {
+                throw new Error("fail");
+            }
+        })
+        .then(() => console.log("a"))
+        .catch(() => console.log("b")
+        .finally(() => console.log("c"))
+
+        .then(() => console.log("d"));
+    </script>
+</body>
+</html>

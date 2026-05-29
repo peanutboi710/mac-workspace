@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", async function () {});
+        async function myFun1() {}
+        const myFun2 = async function () {};
+        setTimeout(() => console.log("매크로테스크 큐"));
+        const r1 = myFun1();
+        const r2 = await myFun2().then(() => "r2");
+        r1.then(() => console.log("success (마이크로테스크 큐)"));
+        console.log("콜 스택");
+        console.log(r2);
+        console.log(r1);
+        console.log(r2);
+    </script>
+</body>
+</html>

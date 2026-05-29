@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const r1 = Promise.resolve();
+        const r2 = Promise.reject();
+
+        promis.all([r1, r2])
+        .then((v) => {
+            console.log("success1");
+            console.log(...v);
+        });
+            .catch((err) => {
+                console.log("fail1");
+                console.log(err);
+                });
+
+         promis.all([r1, r1])
+        .then((v) => {
+            console.log("success2");
+            console.log(...v);
+        });
+            .catch((err) => {
+            console.log("fail2");
+                console.log(err);
+                });
+
+    </script>
+</body>
+</html>
