@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border: 1px solid gray;
+    width: 480px;
+    margin: 16px auto;
+    border-radius: 8px;
+}
+
+form > input {
+    padding: 4px 8px;
+}
+
+form > button {
+    padding: 4px 8x;
+    width: 48px;
+    height: 24px;
+}
+
+#searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border: 1px solid gray;
+    width: 480px;
+    height: 480px;
+    margin: 16px auto;
+    border-radius: 8px;
+}
