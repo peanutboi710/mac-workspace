@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supabase Board (Auth + Board + Comment)</title>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+        align-items: start;
+      }
+      textarea {
+        resize: none;
+      }
+    </style>
+  </head>
+  <body>
+    <details>
+      <summary>회원가입</summary>
+      <form id="joinForm">
+        <input
+          name="join-email"
+          type="email"
+          placeholder="abc@abc.com"
+          required
+        />
+        <input
+          name="join-password"
+          type="password"
+          placeholder="6자리 이상"
+          required
+        />
+        <button>가입</button>
+      </form>
+    </details>
+    <details>
+      <summary>로그인</summary>
+      <form id="loginForm">
+        <input
+          name="login-email"
+          type="email"
+          placeholder="abc@abc.com"
+          required
+        />
+        <input
+          name="login-password"
+          type="password"
+          placeholder="6자리 이상"
+          required
+        />
+        <button>로그인</button>
+      </form>
+    </details>
+    <details>
+      <summary>게시글 작성</summary>
+      <form id="writeForm">
+        <label>
+          제목 :
+          <input name="title" required />
+        </label>
+        <label>
+          내용 :
+          <textarea name="content" required></textarea>
+        </label>
+        <button>작성</button>
+        <!-- createdAt, userId는 자동으로 들어갈 예정 -->
+      </form>
+    </details>
+    <details open>
+      <summary>게시글 목록</summary>
+      <h1>게시글 목록</h1>
+      <section id="postContainer"></section>
+    </details>
+    <details open>
+      <summary>게시글 수정</summary>
+      <h1>게시글 수정</h1>
+      <form id="updateForm">
+        <label>
+          글 ID :
+          <!-- html input -->
+          <!-- <input name="id" disabled /> -->
+          <!-- form이 안 읽어줌 -->
+          <input name="id" readonly />
+          <!-- 폼이 데이터를 읽으면서 사용자의 수정을 막으려면 -->
+        </label>
+        <label>
+          제목 :
+          <input name="title" required />
+        </label>
+        <label>
+          내용 :
+          <textarea name="content" required></textarea>
+        </label>
+        <button>수정</button>
+        <!-- 1. 수정 버튼이 작성자에게만 뜨기 -->
+        <!-- 2. 수정 버튼을 누르면 수정폼으로 데이터 이관 -->
+        <!-- 3. 수정 폼에서 최종 수정하면 DB & 화면 반영 -->
+      </form>
+    </details>
+    <script>
+      //   console.log(window.supabase);
+      const SUPABASE_URL = "https://ajeambmovhybykhjfnxd.supabase.co";
+        const SUPABASE_PUB_KEY = "sb_publishable__-I_gkfw0Lka1Ub1QdCDMg_YQhxUOxg";
+      const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUB_KEY);
+      //   console.log(sb);
+
+      const joinForm = document.querySelector("#joinForm");
+      joinForm.addEventListener("submit", async (event) => {
+        console.log("joinForm");
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log(...formData);
+        const email = formData.get("join-email");
+        const password = formData.get("join-password");
+        const { data, error } = await sb.auth.signUp({
+          email,
+          password,
+        });
+        console.log("data", data);
+        console.log("error", error);
+      });
+
+      const loginForm = document.querySelector("#loginForm");
+      loginForm.addEventListener("submit", async (event) => {
+        console.log("loginForm");
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log(...formData);
+        const email = formData.get("login-email");
+        const password = formData.get("login-password");
+        const { data, error } = await sb.auth.signInWithPassword({
+          email,
+          password,
+        });
+        console.log("data", data);
+        console.log("error", error);
+        if (error) {
+          console.log("로그인 에러 발생");
+          return;
+        }
+        console.log("로그인 성공");
+        // XSS 우려 있으나 개발 편의상 지금은 여기에 저장
+        // 우리가 굳이 안해줘도 supabase sdk가 알아서 저장해주므로 sdk 사용시 안해도 된다
+        // if (data.session.access_token) {
+        //   console.log("토큰 감지");
+        //   localStorage.setItem("sb_access_token", data.session.access_token);
+        //   localStorage.setItem("sb_refresh_token", data.session.refresh_token);
+        //   console.log("토큰 저장 완료");
+        // }
+      });
+
+      const writeForm = document.querySelector("#writeForm");
+      writeForm.addEventListener("submit", async (event) => {
+        console.log("writeForm");
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log(...formData);
+        const title = formData.get("title");
+        const content = formData.get("content");
+        const { data, error } = await sb
+          .from("posts")
+          .insert([{ title, content }]);
+        // 아직 select 권한이 없음.
+        if (error) console.log("error", error);
+        // console.log("data", data);
+        await renderPosts();
+      });
+
+      const postContainer = document.querySelector("#postContainer");
+      document.addEventListener("DOMContentLoaded", async () => {
+        console.log("DOMContentLoaded");
+        await renderPosts();
+        console.log("화면 렌더링 완료");
+      });
+
+      // Update
+      const updateForm = document.querySelector("#updateForm");
+      updateForm.addEventListener("submit", async (event) => {
+        console.log("updateForm");
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log(...formData);
+        const id = formData.get("id");
+        const title = formData.get("title");
+        const content = formData.get("content");
+        const { data, error } = await sb
+          .from("posts")
+          .update({ title, content })
+          .eq("id", id);
+        if (error) console.log("error", error);
+        await renderPosts();
+      });
+
+      async function renderPosts() {
+        const { data, error } = await sb.from("posts").select("*");
+        // Policy 아직 없음 -> 정책 추가
+        if (error) console.log("error", error);
+        console.log("data", data);
+        postContainer.innerHTML = "";
+        for (const v of data) {
+          console.log(v);
+          const post = document.createElement("div");
+          // TODO : 과제(?) - user_id(uuid) => user email을 표시하게
+          post.innerHTML = `
+                <h3>${v.title}</h3>
+                <p>
+                    <code>작성자 : ${v.user_id}</code> <br />
+                    <code>작성일시 : ${v.created_at}</code>
+                </p>
+                <p>${v.content}</p>
+            `;
+          // 버튼 추가 기능
+          const user = await sb.auth.getUser();
+          console.log("user", user);
+          // 어떨 때?
+          if (v.user_id === user.data?.user?.id) {
+            console.log("작성자입니다");
+            // 삭제 버튼
+            const rmBtn = document.createElement("button");
+            rmBtn.textContent = "삭제";
+            rmBtn.addEventListener("click", async () => {
+              // id
+              console.log("[삭제 버튼]", "게시물 ID", v.id);
+              // sb
+              const res = await sb.from("posts").delete().eq("id", v.id);
+              console.log("res", res);
+              if (res.success) {
+                console.log("삭제 성공");
+                await renderPosts();
+              } else {
+                console.log("삭제 실패");
+              }
+            });
+            post.append(rmBtn);
+
+            // 수정 버튼
+            const udBtn = document.createElement("button");
+            udBtn.textContent = "수정";
+            udBtn.addEventListener("click", async () => {
+              // id
+              console.log("[수정 버튼]", "게시물 ID", v.id);
+              // form -> name
+              console.log(updateForm.id);
+              console.log(updateForm.title);
+              console.log(updateForm.content);
+              updateForm.id.value = v.id;
+              updateForm.title.value = v.title;
+              updateForm.content.value = v.content;
+            });
+            post.append(udBtn);
+          } else {
+            console.log("작성자가 아닙니다");
+          }
+          postContainer.append(post);
+        }
+      }
+    </script>
+  </body>
+</html>
