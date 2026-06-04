@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POKEDEX</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="pokedex-case">
+      <div class="pokedex-screen">
+        <h1 class="pixel-text">POKEDEX</h1>
+
+        <form id="searchForm" class="search-box">
+          <input
+            type="text"
+            name="search"
+            placeholder="NAME/ID"
+            class="pixel-input"
+            required
+          />
+          <button type="submit" class="pixel-btn">OK</button>
+        </form>
+
+        <button id="randomBtn" class="pixel-btn random-btn">FUSION_MODE</button>
+
+        <div id="searchResult" class="result-area">
+          <p class="pixel-text" style="font-size: 10px; color: #306230">
+            WAITING FOR INPUT...
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="02_script.js"></script>
+  </body>
+</html>

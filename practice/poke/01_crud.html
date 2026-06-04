@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockAPI</title>
+</head>
+<body>
+    <section>
+        <h1>포켓몬 등록</h1>
+        <form id="pokeRegister">
+            <input name="pokeName" required />
+            <button>등록</button>
+        </form>
+        <section id="pokeList"></section>
+
+        <section>
+            <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+            <script>
+
+                // ai가 추천해준 에러방지
+                let form;
+                let list;
+
+                document.addEventListener("DOMContentLoaded", async () =>{
+                    form = document.querySelector("#pokeRegister");
+                    list = document.querySelector("#pokeList");
+
+                    form.addEventListener("submit", formHandler);
+
+                    await domHandler();
+                });
+
+                /* 기존에 사용한 방식
+                const form = document.querySelector("#pokeRegister");
+                const list = document.querySelector("#pokeList");
+                
+                document.addEventListener("DOMContentLoaded", domHandler);
+                form.addEventListener("submit", formHandler);
+                */
+
+                async function formHandler(event) {
+                    event.preventDefault();
+
+                    const formData = new FormData(event.target);
+
+                    console.log(...formData);
+                    console.log(formData.get("pokeName"));
+
+                    await createData(formData.get("pokeName"));
+                    console.log("제출");
+
+                    drawPokeList(await getData());
+                }
+
+                async function domHandler() {
+                    console.log("화면을 다시 그림");
+
+                    const data = await getData();
+                    console.log("data", data);
+                    
+                    drawPokeList(data);
+                }
+
+                async function createData(name) {
+                    const apiURL = "https://6a1ff4d1e96c1d13b586bada.mockapi.io/pokemon";
+                    
+                    const payload = { name };
+                    console.log(payload);
+
+                    const response = await axios.post(apiURL, payload);
+                    console.log("response.data", response.data);
+
+                    console.log("response", response);
+                }
+
+                async function getData() {
+                    const apiURL = "https://6a1ff4d1e96c1d13b586bada.mockapi.io/pokemon";
+
+                    const response = await axios.get(apiURL);
+                    console.log("response.data", response.data);
+                    return response.data;
+                }
+
+                function drawPokeList(data) {
+                    console.log("drawPokeList", data);
+                    list.innerHTML = "";
+                    for (const v of data) {
+                        const item = document.createElement("p");
+                        item.textContent = v["name"];
+                        list.append(item);
+                    }
+                }
+                
+            </script>
+
+           
+        </section>
+
+    </section>
+    
+</body>
+</html>
